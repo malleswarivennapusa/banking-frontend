@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Users from "./components/Users";
@@ -13,6 +12,7 @@ function App() {
       <div className="container mt-4">
         <Routes>
           <Route path="/" element={<Users />} />
+          <Route path="/users" element={<Users />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/loans" element={<Loans />} />

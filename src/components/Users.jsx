@@ -1,9 +1,7 @@
-
 import { useState, useEffect } from "react";
-import API from "../services/api";
+import { API } from "../services/api";
 
 function Users() {
-
   const [users, setUsers] = useState([]);
   const [form, setForm] = useState({
     name: "",
@@ -11,14 +9,17 @@ function Users() {
     password: ""
   });
 
-  // Fetch users when page loads
   useEffect(() => {
     fetchUsers();
   }, []);
 
   const fetchUsers = async () => {
-    const response = await API.get("/users");
-    setUsers(response.data);
+    try {
+      const res = await API.get("/users");
+      setUsers(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -46,9 +47,9 @@ function Users() {
 
       <h4 className="mt-4">User List</h4>
       <ul className="list-group">
-        {users.map(user => (
-          <li key={user.id} className="list-group-item">
-            {user.name} - {user.email}
+        {users.map(u => (
+          <li key={u.id} className="list-group-item">
+            {u.name} - {u.email}
           </li>
         ))}
       </ul>
